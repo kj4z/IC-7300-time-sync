@@ -27,8 +27,7 @@ import serial
 import struct
 
 # Here we get the computers current time in hours and minutes.
-# Add in the offset, if any, and roll over if we exceed 23 or go below 0
-# hours.  Finally appending hex byte formated time data to the command string.
+# Finally appending hex byte formated time data to the command string.
 hours = time.strftime("%H", time.gmtime())
 
 if (len(hours) < 2):
