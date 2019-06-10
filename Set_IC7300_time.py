@@ -14,8 +14,6 @@
 # match your setup. i.e. COM3 or similar for windows.
 #
 baudrate = 9600  #change to match your radio
-gmtoffset = 0  #change to a negative or positive offset from GMT if you
-#               want to use local time.  i.e. -5 for EST
 serialport = "/dev/ttyUSB0"  # Serial port of your radios serial interface.
 
 # Defining the command to set the radios time in hex bytes.
@@ -31,14 +29,7 @@ import struct
 # Here we get the computers current time in hours and minutes.
 # Add in the offset, if any, and roll over if we exceed 23 or go below 0
 # hours.  Finally appending hex byte formated time data to the command string.
-t = time.localtime()
-hours = time.strftime("%H")
-hours = int(hours) + gmtoffset
-if hours < 0:
-    hours = 23 + hours
-if hours > 23:
-    hours = 23 - hours
-hours = str(hours)
+hours = time.strftime("%H", time.gmtime())
 
 if (len(hours) < 2):
     hours = "0" + str(hours)
